@@ -71,10 +71,11 @@ def get_formatted_output(data) -> str:
     """
     Get output string. That can be used to print in console.
     """
-    return "\n".join(
+    output_data = [
         f'The group "{key}" has the following {len(data[key])} member(s): {", ".join(i for i in data[key])}'
         for key in sorted(data)
-    )
+    ]
+    return "\n".join(output_data)
 
 
 def main():
