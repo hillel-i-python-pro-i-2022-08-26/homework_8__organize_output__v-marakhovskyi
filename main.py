@@ -62,6 +62,7 @@ def organize_data(humans: T_HUMANS) -> defaultdict:
     organized_dict = defaultdict(list)
 
     for inner_dict in humans:
+        # Assign a value "name" as a list of names to a key "group"
         organized_dict[inner_dict["group"]].append(inner_dict["name"])
     return organized_dict
 
