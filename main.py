@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import TypeAlias, TypedDict
 
@@ -55,19 +56,25 @@ class DataProvider:
         return self._generate_humans(groups=_groups, amount_of_humans=amount_of_humans)
 
 
-def organize_data(humans: T_HUMANS):
+def organize_data(humans: T_HUMANS) -> defaultdict:
     """
     Organize data in way, useful for further processing.
     At this stage not allowed to make output string.
     """
-    ...
+    organized_dict = defaultdict(list)
+
+    for inner_dict in humans:
+        organized_dict[inner_dict['group']].append(inner_dict['name'])
+    return organized_dict
 
 
 def get_formatted_output(data) -> str:
     """
     Get output string. That can be used to print in console.
     """
-    ...
+    return "\n".join(
+        f'The group "{key}" has the following {len(data[key])} member(s): {", ".join(i for i in data[key])}' for key in
+        sorted(data))
 
 
 def main():
